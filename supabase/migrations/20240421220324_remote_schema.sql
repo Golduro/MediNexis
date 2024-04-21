@@ -35,7 +35,7 @@ SET default_table_access_method = "heap";
 CREATE TABLE IF NOT EXISTS "public"."tbl_allowed_domains" (
     "id" bigint NOT NULL,
     "created_at" timestamp with time zone DEFAULT "timezone"('utc'::"text", "now"()) NOT NULL,
-    "domain" "text" NOT NULL
+    "domain" "text"
 );
 
 ALTER TABLE "public"."tbl_allowed_domains" OWNER TO "postgres";
@@ -322,26 +322,6 @@ ALTER TABLE ONLY "public"."tbl_user"
 CREATE POLICY "Policy with security definer functions" ON "public"."tbl_allowed_domains" USING (true);
 
 CREATE POLICY "Policy with security definer functions" ON "public"."tbl_checklist_productlists" TO "authenticated" USING (true);
-
-CREATE POLICY "Policy with security definer functions" ON "public"."tbl_checklists" TO "authenticated" USING (true);
-
-CREATE POLICY "Policy with security definer functions" ON "public"."tbl_companies" TO "authenticated" USING (true);
-
-CREATE POLICY "Policy with security definer functions" ON "public"."tbl_doctors" TO "authenticated" USING (true);
-
-CREATE POLICY "Policy with security definer functions" ON "public"."tbl_imported" TO "authenticated" USING (true);
-
-CREATE POLICY "Policy with security definer functions" ON "public"."tbl_inventory" TO "authenticated" USING (true);
-
-CREATE POLICY "Policy with security definer functions" ON "public"."tbl_patients" TO "authenticated" USING (true);
-
-CREATE POLICY "Policy with security definer functions" ON "public"."tbl_percentages" TO "authenticated" USING (true);
-
-CREATE POLICY "Policy with security definer functions" ON "public"."tbl_products" TO "authenticated" USING (true);
-
-CREATE POLICY "Policy with security definer functions" ON "public"."tbl_purchases" TO "authenticated" USING (true);
-
-CREATE POLICY "Policy with security definer functions" ON "public"."tbl_user" TO "authenticated" USING (true);
 
 ALTER TABLE "public"."tbl_allowed_domains" ENABLE ROW LEVEL SECURITY;
 
