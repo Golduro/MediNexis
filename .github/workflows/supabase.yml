@@ -28,8 +28,8 @@ jobs:
             # Passo para fazer o commit e push das alterações para o GitHub
       - name: Commit and push changes
         run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
+          git config --global user.email "conradoacarvalho@gmail.com"
+          git config --global user.name "Golduro"
           git add .
           git commit -m "Push from Supabase"
           git push origin main
