@@ -31,7 +31,5 @@ jobs:
           git config --global user.name "Golduro"
           git add .
           git commit -m "Push from Supabase"
-          # Substitua a URL remota do repositório pelo formato com o token de acesso pessoal
-          git remote set-url origin https://${{ secrets.GIT_ACTION_TOKEN }}@github.com/Golduro/medinexis.git
           git push origin main
 
