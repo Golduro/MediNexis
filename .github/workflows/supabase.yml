@@ -14,6 +14,9 @@ jobs:
       # Passo para instalar o Supabase CLI
       - name: Install Supabase CLI
         run: npm install -g supabase-cli
+      
+      - name: Check Supabase CLI version
+        run: supabase --version
 
       # Passo para configurar as credenciais do Supabase
       - name: Setup Supabase CLI
