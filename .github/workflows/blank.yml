@@ -27,4 +27,4 @@ jobs:
       # Passo para executar o comando Supabase para fazer o push
       - name: Push to GitHub from Supabase
         run: |
-          supabase migrate up
+          supabase migrate list
