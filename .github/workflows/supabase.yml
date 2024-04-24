@@ -22,7 +22,7 @@ jobs:
           version: latest
 
       - run: supabase link -p ${{ env.SUPABASE_DB_PASSWORD }} --project-ref ${{ env.SUPABASE_PROJECT_ID }}
-      - run: supabase db pull --schema auth,storage
+      - run: supabase db pull
       - run: supabase migration squash
 
             # Passo para fazer o commit e push das alterações para o GitHub
