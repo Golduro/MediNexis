@@ -22,5 +22,14 @@ jobs:
           version: latest
 
       - run: supabase link -p ${{ env.SUPABASE_DB_PASSWORD }} --project-ref ${{ env.SUPABASE_PROJECT_ID }}
-      - run: echo "Y" | supabase db pull
+      - run: supabase db pull --schema auth,storage
       - run: supabase migration squash
+
+            # Passo para fazer o commit e push das alterações para o GitHub
+      - name: Commit and push changes
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add .
+          git commit -m "Push from Supabase"
+          git push origin main
