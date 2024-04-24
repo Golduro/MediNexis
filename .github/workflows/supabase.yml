@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -20,6 +21,10 @@ jobs:
           echo "url: ${{ secrets.SUPABASE_URL }}" > .supabasecli
           echo "key: ${{ secrets.SUPABASE_KEY }}" >> .supabasecli
 
+      # Passo para imprimir o PATH (opcional)
+      - name: Print PATH
+        run: echo $PATH
+
       # Passo para aplicar as migrações no Supabase
       - name: Migrate database
         run: supabase migrate up --schema public
@@ -27,6 +32,8 @@ jobs:
       # Passo para fazer o commit e push das alterações para o GitHub
       - name: Commit and push changes
         run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
           git add .
           git commit -m "Push from Supabase"
           git push origin main
