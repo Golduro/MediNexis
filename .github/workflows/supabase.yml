@@ -9,10 +9,6 @@ on:
 jobs:
   migrate:
     runs-on: ubuntu-latest
-    env:
-      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
-      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
-      SUPABASE_PROJECT_ID: ${{ secrets.SUPABASE_PROJECT_ID }}
 
     steps:
       - uses: actions/checkout@v4
@@ -20,6 +16,6 @@ jobs:
         with:
           version: latest
 
-      - run: supabase link -p SUPABASE_DB_PASSWORD --project-ref ${{ secrets.SUPABASE_PROJECT_ID }}
+      - run: supabase link -p ${{ secrets.SUPABASE_DB_PASSWORD }} --project-ref ${{ secrets.SUPABASE_PROJECT_ID }}
       - run: echo "Y" | supabase db pull
       - run: supabase migration squash
