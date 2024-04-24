@@ -1,30 +1,32 @@
 name: Push from Supabase
 
 on:
-  # Defina os eventos que devem acionar o workflow, por exemplo, quando uma alteração é feita no banco de dados no Supabase
+  # Aciona o workflow quando uma alteração é feita no banco de dados do Supabase
   push:
     branches:
-      - main # Substitua pelo nome do seu branch principal
-
+      - main
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Passo para clonar o repositório do GitHub onde você deseja fazer o push
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
       # Passo para instalar o Supabase CLI
       - name: Install Supabase CLI
-        run: npm install -g supabase-cli # Ou o método que você usa para instalar o Supabase CLI
+        run: npm install -g supabase-cli
 
       # Passo para configurar as credenciais do Supabase
       - name: Setup Supabase CLI
         run: |
           echo "url: ${{ secrets.SUPABASE_URL }}" > .supabasecli
           echo "key: ${{ secrets.SUPABASE_KEY }}" >> .supabasecli
-      # Passo para executar o comando Supabase para fazer o push
-      - name: Push to GitHub from Supabase
+
+      # Passo para aplicar as migrações no Supabase
+      - name: Migrate database
+        run: supabase migrate up --schema public
+
+      # Passo para fazer o commit e push das alterações para o GitHub
+      - name: Commit and push changes
         run: |
-          supabase migrate list
+          git add .
+          git commit -m "Push from Supabase"
+          git push origin main
