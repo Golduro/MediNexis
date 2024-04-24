@@ -22,13 +22,16 @@ jobs:
           version: latest
 
       - run: supabase link -p ${{ env.SUPABASE_DB_PASSWORD }} --project-ref ${{ env.SUPABASE_PROJECT_ID }}
-      - run: supabase db pull --debug
+      - run: supabase db pull
       
-            # Passo para fazer o commit e push das alterações para o GitHub
+      # Passo para fazer o commit e push das alterações para o GitHub
       - name: Commit and push changes
         run: |
           git config --global user.email "conradoacarvalho@gmail.com"
           git config --global user.name "Golduro"
           git add .
           git commit -m "Push from Supabase"
+          # Substitua a URL remota do repositório pelo formato com o token de acesso pessoal
+          git remote set-url origin https://${{ secrets.GIT_ACTION_TOKEN }}@github.com/owner/repo.git
           git push origin main
+
