@@ -20,6 +20,6 @@ jobs:
         with:
           version: latest
 
-      - run: supabase link --project-ref ${{ secrets.SUPABASE_PROJECT_ID }}
-      - run: supabase db pull
+      - run: supabase link -p SUPABASE_DB_PASSWORD --project-ref ${{ secrets.SUPABASE_PROJECT_ID }}
+      - run: echo "Y" | supabase db pull
       - run: supabase migration squash
