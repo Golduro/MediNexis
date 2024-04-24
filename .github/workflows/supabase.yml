@@ -13,7 +13,7 @@ jobs:
     steps:
       # Passo para instalar o Supabase CLI
       - name: Install Supabase CLI
-        run: npm install -g supabase-cli
+        run: npm install supabase-cli
       
       - name: Check Supabase CLI version
         run: supabase --version
