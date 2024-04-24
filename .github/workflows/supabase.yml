@@ -16,14 +16,6 @@ jobs:
       SUPABASE_PROJECT_ID: ${{ secrets.SUPABASE_PROJECT_ID }}
       
     steps:
-      - uses: actions/checkout@v4
-      - uses: supabase/setup-cli@v1
-        with:
-          version: latest
-
-      - run: supabase link -p ${{ env.SUPABASE_DB_PASSWORD }} --project-ref ${{ env.SUPABASE_PROJECT_ID }}
-      - run: supabase db pull
-      - run: supabase migration squash
 
             # Passo para fazer o commit e push das alterações para o GitHub
       - name: Commit and push changes
